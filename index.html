@@ -9,7 +9,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="PLUME PLAYLAB">
 <meta property="og:title" content="PLUME PLAYLAB — Laboratoire de jeux vidéo">
-<meta property="og:description" content="On ne suit personne. On crée des mondes. Des jeux gratuits à lancer direct dans le navigateur : La Guerre du Potager, Bave de Guerre…">
+<meta property="og:description" content="On ne suit personne. On crée des mondes. Des jeux gratuits à lancer direct dans le navigateur : La Guerre du Potager, Bave de Guerre…">
 <meta property="og:url" content="https://plume-playlab.vercel.app/">
 <meta property="og:image" content="https://plume-playlab.vercel.app/assets/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -133,14 +133,9 @@ main,footer{position:relative;z-index:2}
 .g-track{display:flex;height:100%;width:max-content;will-change:transform}
 .panel{height:100%;flex:0 0 auto;position:relative;padding:calc(var(--pad) + 76px) var(--pad) var(--pad)}
 /* salle d'exposition : un jeu */
-.exhibit{width:max-content;min-width:150vw;display:grid;grid-template-columns:auto 58vw;column-gap:5vw;padding-right:10vw}
-.exhibit .ex-num{position:absolute;top:calc(var(--pad) + 76px);left:var(--pad);color:var(--metal)}
-.exhibit .ex-title{align-self:center;font-size:clamp(80px,min(16vw,24vh),330px);line-height:.8;padding-top:40px}
-.exhibit .ex-title .line:nth-child(even) .ch{color:transparent;-webkit-text-stroke:1.5px var(--bone)}
-.exhibit .ex-title .line:last-child .ch{color:var(--accent,var(--blue));-webkit-text-stroke:0}
-.exhibit[data-layout="b"]{grid-template-columns:58vw auto}
-.exhibit[data-layout="b"] .ex-title{order:2}
-.ex-side{display:flex;flex-direction:column;justify-content:center;gap:22px}
+.exhibit{width:100vw;display:flex;justify-content:center;align-items:center}
+.exhibit .ex-num{color:var(--metal)}
+.ex-side{display:flex;flex-direction:column;justify-content:center;gap:22px;width:min(78vw,calc(54vh * 1.777))}
 .art-frame{position:relative;display:block;width:min(100%,calc(54vh * 1.777));aspect-ratio:16/9;height:auto;overflow:hidden;clip-path:inset(14% 22% 14% 22%);background:#111214}
 .art-frame .art-in{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;color:var(--metal);
   background:repeating-linear-gradient(-45deg,transparent 0 22px,rgba(119,123,128,.12) 22px 23px),radial-gradient(circle at 50% 50%,rgba(47,211,180,.08),transparent 60%)}
@@ -179,7 +174,6 @@ main,footer{position:relative;z-index:2}
 .stack .panel{width:100%!important;min-width:0;min-height:100vh;height:auto;padding-right:var(--pad)}
 .stack .exhibit{display:flex;flex-direction:column;gap:30px;justify-content:center}
 .stack .exhibit .ex-num{position:static}
-.stack .exhibit .ex-title{font-size:clamp(70px,22vw,200px)}
 .stack .art-frame{clip-path:none;width:100%}
 .stack .ex-info{grid-template-columns:1fr 1fr;height:auto}
 .stack .ex-info p{grid-column:1/3}
@@ -210,15 +204,13 @@ main,footer{position:relative;z-index:2}
 
 /* ---------- footer ---------- */
 footer{min-height:100vh;background:var(--black);padding:calc(var(--pad) + 70px) var(--pad) var(--pad);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;position:relative}
-footer .f-top{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px}
+footer .f-top{display:grid;grid-template-columns:1.4fr 1fr;gap:30px;align-items:end}
 footer .f-top h4{font-weight:900;font-stretch:62%;font-size:clamp(40px,5vw,86px);line-height:.85;text-transform:uppercase}
 footer .f-top h4 span{color:var(--blue)}
 footer .f-nav{list-style:none;display:flex;flex-direction:column;gap:6px}
 footer .f-nav a{font-weight:800;font-stretch:70%;font-size:clamp(26px,2.6vw,42px);text-transform:uppercase;line-height:1;display:inline-flex;gap:12px;align-items:baseline;transition:color .25s,transform .4s cubic-bezier(.2,.8,.2,1)}
 footer .f-nav a:hover{color:var(--blue);transform:translateX(10px)}
 footer .f-nav a i{font-style:normal;font-family:var(--mono);font-size:10px;color:var(--metal)}
-footer .f-contact{color:var(--metal);display:flex;flex-direction:column;gap:10px}
-footer .f-contact b{color:var(--bone);font-weight:700;font-stretch:80%;font-size:20px;text-transform:uppercase}
 .sign{position:relative;width:100%;margin-top:6vh}
 .sign svg.word{width:100%;height:auto;display:block;overflow:visible}
 .sign svg.word text{font-family:var(--ff);font-weight:900;font-stretch:62%;font-size:300px;letter-spacing:-2px}
@@ -269,7 +261,6 @@ footer .f-bot{display:flex;justify-content:space-between;color:var(--metal);bord
     <li><a class="lk" href="#home" data-nav><span>Accueil</span><span>Accueil</span></a></li>
     <li><a class="lk" href="#games" data-nav><span>Jeux</span><span>Jeux</span></a></li>
     <li><a class="lk" href="#about" data-nav><span>Le labo</span><span>Le labo</span></a></li>
-    <li><a class="lk" href="#contact" data-nav><span>Contact</span><span>Contact</span></a></li>
   </ul>
   <span class="idx mono">00 — Accueil</span>
 </header>
@@ -336,27 +327,21 @@ footer .f-bot{display:flex;justify-content:space-between;color:var(--metal);bord
       <span class="line" data-split>MONDES SANS LIMITES.</span>
     </h2>
     <div class="a-body">
-      <p class="a-txt">PLUME PLAYLAB est un laboratoire de jeux vidéo : un endroit où l'on teste, où l'on bricole et où l'on imagine des univers. Des idées un peu folles, des héros qui ont de la gueule, et des mondes qu'on a envie de retrouver. On ne suit pas les tendances : on construit les nôtres.</p>
+      <p class="a-txt">PLUME PLAYLAB est un laboratoire de jeux vidéo : un endroit où l'on teste, où l'on bricole et où l'on imagine des univers. Des idées un peu folles, des héros qui ont de la gueule, et des mondes qu'on a envie de retrouver. On ne suit pas les tendances : on construit les nôtres.</p>
       <div class="sig"><span>PLAY DIFFERENT.</span><br>CREATE LIMITLESS.</div>
     </div>
   </section>
 </main>
 
 <!-- FOOTER -->
-<footer id="contact" data-sec="05 — Contact">
+<footer id="fin" data-sec="05 — PLUME">
   <div class="f-top">
     <h4>On se voit<br>dans le<br><span>prochain monde.</span></h4>
     <ul class="f-nav">
       <li><a href="#home" data-nav><i>01</i>Accueil</a></li>
       <li><a href="#games" data-nav><i>02</i>Jeux</a></li>
       <li><a href="#about" data-nav><i>03</i>Le labo</a></li>
-      <li><a href="#contact" data-nav><i>04</i>Contact</a></li>
     </ul>
-    <div class="f-contact mono">
-      <span>Contact</span>
-      <b>Canal de contact à venir</b>
-      <span>Les nouvelles du labo arrivent ici.</span>
-    </div>
   </div>
   <div class="sign" id="sign">
     <svg class="feather" id="feather" viewBox="0 0 240 460" aria-hidden="true"><use href="#plume"/></svg>
@@ -437,11 +422,9 @@ GAMES.forEach((g, i) => {
   const el = document.createElement('article');
   el.className = 'panel exhibit'; el.dataset.layout = g.layout || (i % 2 ? 'b' : 'a');
   el.style.setProperty('--accent', g.accent || '#2FD3B4');
-  const lines = []; g.title.toUpperCase().split(' ').forEach(w => { const l = lines[lines.length - 1]; if (l && (l + ' ' + w).length <= 9) lines[lines.length - 1] = l + ' ' + w; else lines.push(w); });
   el.innerHTML = `
-    <span class="ex-num mono">Salle ${n} — ${esc(g.genre)}</span>
-    <h3 class="ex-title mega">${lines.map(l => `<span class="line" data-split>${esc(l)}</span>`).join('')}</h3>
     <div class="ex-side">
+      <span class="ex-num mono">Salle ${n} — ${esc(g.genre)}</span>
       <a class="art-frame" href="${esc(g.url || '#')}" target="_blank" rel="noopener" data-cursor="JOUER" aria-label="Ouvrir ${esc(g.title)}">
         <div class="art-in">${g.visual ? `<img src="${esc(g.visual)}" alt="Affiche de ${esc(g.title)}" loading="lazy">` :
           `<span class="tagph mono">Emplacement temporaire — visuel officiel à venir</span><span class="mono">${esc(g.title)}</span>`}${g.preview ? `<video src="${esc(g.preview)}" muted loop playsinline preload="none" aria-hidden="true"></video>` : ''}</div>
@@ -843,10 +826,6 @@ function buildTimelines() {
       onUpdate: s => gsap.set('#g-prog', { scaleX: s.progress }) });
     const CA = { containerAnimation: hT };
     $$('.exhibit').forEach((ex, i) => {
-      const chs = ex.querySelectorAll('.ex-title .ch');
-      if (i === 0) gsap.from(chs, { yPercent: 110, rotate: 8, stagger: .025, duration: 1.1, ease: 'expo.out', scrollTrigger: { trigger: '#track-wrap', start: 'top 55%' } });
-      else gsap.from(chs, { yPercent: 110, stagger: .02, ease: 'none', scrollTrigger: { ...CA, trigger: ex, start: 'left 90%', end: 'left 40%', scrub: true } });
-      gsap.to(ex.querySelector('.ex-title'), { xPercent: 10, ease: 'none', scrollTrigger: { ...CA, trigger: ex, start: 'left left', end: 'right left', scrub: true } });
       const fr = ex.querySelector('.art-frame');
       gsap.to(fr, { clipPath: 'inset(0% 0% 0% 0%)', ease: 'none', scrollTrigger: { ...CA, trigger: fr, start: 'left 95%', end: 'left 35%', scrub: true } });
       gsap.fromTo(fr.querySelector('.art-in'), { scale: 1.08 }, { scale: 1, ease: 'none', scrollTrigger: { ...CA, trigger: fr, start: 'left right', end: 'right left', scrub: true } });
@@ -880,7 +859,7 @@ function buildTimelines() {
   }
 
   // --- FOOTER : la plume tombe et écrit PLUME, puis fondu au noir ---
-  ST.foot = ScrollTrigger.create({ trigger: '#contact', start: 'top bottom', end: 'bottom bottom' });
+  ST.foot = ScrollTrigger.create({ trigger: '#fin', start: 'top bottom', end: 'bottom bottom' });
   const wordT = $('#word-t');
   let L = 3000; try { L = wordT.getComputedTextLength() * 3.2 || 3000; } catch (e) {}
   gsap.set(wordT, { strokeDasharray: L, strokeDashoffset: REDUCED ? 0 : L });
@@ -1016,7 +995,7 @@ async function boot() {
   if (!GL) document.documentElement.classList.add('no-webgl');
   setP(75);
   if (GL) { try { renderer.compile(scene, camera); } catch (e) {} }
-  skewEls = $$('.ex-title, .next b, .about h2');
+  skewEls = $$('.next b, .about h2');
   skewSet = skewEls.map(el => gsap.quickSetter(el, 'skewY', 'deg'));
   buildTimelines();
   gsap.ticker.add(tick);
