@@ -77,6 +77,7 @@ main,footer{position:relative;z-index:2}
 #cursor .ring{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1px solid var(--bone);display:flex;align-items:center;justify-content:center;transition:width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),margin .35s cubic-bezier(.2,.8,.2,1),background .25s}
 #cursor .ring span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--black);opacity:0;transition:opacity .2s;font-weight:600}
 #cursor.big{mix-blend-mode:normal}
+#cursor.big .dot{opacity:0}
 #cursor.big .ring{width:110px;height:110px;margin:-55px 0 0 -55px;background:var(--bone)}
 #cursor.big .ring span{opacity:1}
 @media (hover:none){#cursor{display:none}}
@@ -131,12 +132,12 @@ main,footer{position:relative;z-index:2}
 
 .g-track-wrap{position:relative;height:100vh;overflow:hidden}
 .g-track{display:flex;height:100%;width:max-content;will-change:transform}
-.panel{height:100%;flex:0 0 auto;position:relative;padding:calc(var(--pad) + 76px) var(--pad) var(--pad)}
+.panel{height:100%;flex:0 0 auto;position:relative;padding:calc(var(--pad) + 64px) var(--pad) calc(var(--pad) + 14px)}
 /* salle d'exposition : un jeu */
 .exhibit{width:100vw;display:flex;justify-content:center;align-items:center}
 .exhibit .ex-num{color:var(--metal)}
-.ex-side{display:flex;flex-direction:column;justify-content:center;gap:22px;width:min(78vw,calc(54vh * 1.777))}
-.art-frame{position:relative;display:block;width:min(100%,calc(54vh * 1.777));aspect-ratio:16/9;height:auto;overflow:hidden;clip-path:inset(14% 22% 14% 22%);background:#111214}
+.ex-side{display:flex;flex-direction:column;justify-content:center;gap:16px;width:min(78vw, calc(min(54vh, 100vh - 390px) * 1.777));min-width:min(78vw,420px)}
+.art-frame{position:relative;display:block;width:100%;aspect-ratio:16/9;height:auto;overflow:hidden;clip-path:inset(14% 22% 14% 22%);background:#111214}
 .art-frame .art-in{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;color:var(--metal);
   background:repeating-linear-gradient(-45deg,transparent 0 22px,rgba(119,123,128,.12) 22px 23px),radial-gradient(circle at 50% 50%,rgba(47,211,180,.08),transparent 60%)}
 .art-frame img,.art-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity .5s}
@@ -150,14 +151,14 @@ main,footer{position:relative;z-index:2}
 .art-frame .corner{position:absolute;width:18px;height:18px;border-color:var(--accent,var(--blue));border-style:solid}
 .art-frame .c1{left:14px;top:14px;border-width:1px 0 0 1px}.art-frame .c2{right:14px;top:14px;border-width:1px 1px 0 0}
 .art-frame .c3{left:14px;bottom:14px;border-width:0 0 1px 1px}.art-frame .c4{right:14px;bottom:14px;border-width:0 1px 1px 0}
-.ex-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px 24px;align-items:end;width:min(100%,calc(54vh * 1.777))}
-.ex-info{height:170px;align-content:start}
+.ex-info{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:14px 24px;align-items:end;width:100%}
+.ex-info{height:140px;align-content:start}
 .ex-info p{grid-column:1/-1;max-width:none!important;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;min-height:4.05em}
 .ex-info .f b{min-height:2em}
 .ex-info p{font-size:clamp(15px,1.15vw,18px);line-height:1.35;font-stretch:88%;font-weight:500;max-width:440px}
 .ex-info .f{border-top:1px solid var(--metal);padding-top:10px}
-.ex-info .f b{display:block;font-weight:800;font-stretch:75%;font-size:20px;text-transform:uppercase;margin-top:6px;line-height:1}
-.cta{position:relative;width:clamp(100px,8vw,140px);aspect-ratio:1;border-radius:50%;background:var(--accent,var(--blue));color:var(--black);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-stretch:62%;font-size:clamp(22px,1.8vw,30px);line-height:.88;text-transform:uppercase}
+.ex-info .f b{display:block;font-weight:800;font-stretch:75%;font-size:18px;text-transform:uppercase;margin-top:6px;line-height:1}
+.cta{position:relative;width:clamp(86px,7vw,120px);aspect-ratio:1;border-radius:50%;background:var(--accent,var(--blue));color:var(--black);display:flex;align-items:center;justify-content:center;text-align:center;font-weight:900;font-stretch:62%;font-size:clamp(22px,1.8vw,30px);line-height:.88;text-transform:uppercase}
 .cta svg{position:absolute;inset:-16%;width:132%;height:132%;animation:spin 18s linear infinite;pointer-events:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 /* salle suivante */
