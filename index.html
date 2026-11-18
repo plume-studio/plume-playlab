@@ -76,6 +76,7 @@ main,footer{position:relative;z-index:2}
 #cursor .dot{position:absolute;width:8px;height:8px;margin:-4px 0 0 -4px;border-radius:50%;background:var(--bone)}
 #cursor .ring{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1px solid var(--bone);display:flex;align-items:center;justify-content:center;transition:width .35s cubic-bezier(.2,.8,.2,1),height .35s cubic-bezier(.2,.8,.2,1),margin .35s cubic-bezier(.2,.8,.2,1),background .25s}
 #cursor .ring span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;color:var(--black);opacity:0;transition:opacity .2s;font-weight:600}
+#cursor.big{mix-blend-mode:normal}
 #cursor.big .ring{width:110px;height:110px;margin:-55px 0 0 -55px;background:var(--bone)}
 #cursor.big .ring span{opacity:1}
 @media (hover:none){#cursor{display:none}}
@@ -146,7 +147,8 @@ main,footer{position:relative;z-index:2}
 .art-frame img,.art-frame video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.2,.8,.2,1),opacity .5s}
 .art-frame video{opacity:0}
 .art-frame.playing video{opacity:1}
-.art-frame:hover img{transform:scale(1.04)}
+.art-frame img{transition:filter .4s}
+.art-frame:hover img{filter:brightness(1.08)}
 .art-hint{position:absolute;left:18px;bottom:16px;z-index:2;color:var(--bone);background:rgba(8,9,11,.7);padding:8px 12px;transition:background .3s,color .3s}
 .art-frame:hover .art-hint{background:var(--blue);color:var(--black)}
 .art-frame .tagph{border:1px dashed var(--metal);padding:10px 14px;color:var(--bone)}
@@ -726,7 +728,7 @@ function render(dt) {
   const aspect = innerWidth / innerHeight, xs = Math.min(aspect, 1.6) / 1.6;
   const sc = c.scale * Engine.intro.blob * (aspect < .8 ? .56 : 1);
   blob.scale.setScalar(Math.max(sc, .0001));
-  blob.position.set(c.x * xs + m.sx * .12, c.y + m.sy * .08 + (aspect < .8 ? .45 : 0), 0);
+  blob.position.set(c.x * xs + m.sx * .05, c.y + m.sy * .035 + (aspect < .8 ? .45 : 0), 0);
   if (!REDUCED) { blob.rotation.y += dt * .12; blob.rotation.x = m.sy * .25; }
   blob.rotation.z = c.rotZ;
 
@@ -753,7 +755,7 @@ function render(dt) {
     im.instanceMatrix.needsUpdate = true;
   });
 
-  camera.position.set(m.sx * .25, m.sy * .18, c.camZ);
+  camera.position.set(m.sx * .1, m.sy * .07, c.camZ);
   camera.lookAt(0, 0, 0);
   camera.rotation.z += c.rotZ * .3;
   renderer.render(scene, camera);
@@ -971,18 +973,20 @@ $$('.cta').forEach(cta => {
 /* ====================================================================
    7. TICKER UNIQUE
    ==================================================================== */
-let skewEls = [];
+let skewEls = [], skewSet = [], skewNow = 0, skewLast = 0;
 function tick(t, dtMs) {
   const dt = Math.min(dtMs / 1000, .05) || .016;
   if (lenis) lenis.raf(t * 1000);
   Engine.scroll = lenis ? lenis.scroll : scrollY;
-  if (!lenis) Engine.vel *= .9;
+  Engine.vel *= .85; // la vitesse retombe à zéro dès qu'on arrête de défiler
   Engine.sample(Engine.scroll);
   Engine.step(dt);
   // distorsion typographique selon la vitesse de scroll
   if (!REDUCED) {
-    const sk = gsap.utils.clamp(-6, 6, Engine.vel * .25);
-    for (const el of skewEls) el.style.transform = `skewY(${sk}deg)`;
+    // lissage + seuil : pas de micro-mouvement quand on ne défile pas
+    skewNow += (gsap.utils.clamp(-5, 5, Engine.vel * .22) - skewNow) * .12;
+    if (Math.abs(skewNow) < .02) skewNow = 0;
+    if (skewNow !== skewLast) { for (const set of skewSet) set(skewNow); skewLast = skewNow; }
   }
   // curseur
   cp.rx += (cp.x - cp.rx) * .18; cp.ry += (cp.y - cp.ry) * .18;
@@ -1013,6 +1017,7 @@ async function boot() {
   setP(75);
   if (GL) { try { renderer.compile(scene, camera); } catch (e) {} }
   skewEls = $$('.ex-title, .next b, .about h2');
+  skewSet = skewEls.map(el => gsap.quickSetter(el, 'skewY', 'deg'));
   buildTimelines();
   gsap.ticker.add(tick);
   gsap.ticker.lagSmoothing(0);
